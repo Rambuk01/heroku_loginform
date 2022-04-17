@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 #postgres://whaqehowirwnvt:24df797a7f4bacdc7ed258dc588987a90c54472e2d318c101f52776b02c8045d@ec2-52-73-155-171.compute-1.amazonaws.com:5432/d10qo1ebjbv2g3
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://whaqehowirwnvt:24df797a7f4bacdc7ed258dc588987a90c54472e2d318c101f52776b02c8045d@ec2-52-73-155-171.compute-1.amazonaws.com:5432/d10qo1ebjbv2g3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://whaqehowirwnvt:24df797a7f4bacdc7ed258dc588987a90c54472e2d318c101f52776b02c8045d@ec2-52-73-155-171.compute-1.amazonaws.com:5432/d10qo1ebjbv2g3'
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
 login_manager = LoginManager()
