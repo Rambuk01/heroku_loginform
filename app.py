@@ -22,9 +22,9 @@ login_manager.login_view = "login"
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Loser.query.get(int(user_id))
 
-class User(db.Model, UserMixin):
+class Loser(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
@@ -35,7 +35,7 @@ class RegisterForm(FlaskForm):
     submit = SubmitField("Register")
     
     def validate_username(self, username):
-        existing_user_username = User.query.filter_by(username=username.data).first()
+        existing_user_username = Loser.query.filter_by(username=username.data).first()
         if existing_user_username:
             raise ValidationError("That username already exists. Please choose different username.")
 
@@ -52,7 +52,7 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = Loser.query.filter_by(username=form.username.data).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
@@ -77,7 +77,7 @@ def register():
     
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password)
+        new_user = Loser(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
